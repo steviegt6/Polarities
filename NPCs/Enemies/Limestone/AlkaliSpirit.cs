@@ -51,8 +51,8 @@ namespace Polarities.NPCs.Enemies.Limestone
         public override void SetDefaults()
         {
             NPC.aiStyle = -1;
-            NPC.width = 30;
-            NPC.height = 56;
+            NPC.width = 32;
+            NPC.height = 54;
             NPC.damage = 20;
             NPC.lifeMax = 50;
             NPC.knockBackResist = 1f;
