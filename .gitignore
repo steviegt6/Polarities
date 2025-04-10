@@ -1,8 +1,8 @@
-*.user
-*.sln
-*.editorconfig
 .vs/
-.cache/
+.vscode/
+.idea/
+
 bin/
 obj/
-Assets/Effects/.compiler
+
+*.user
