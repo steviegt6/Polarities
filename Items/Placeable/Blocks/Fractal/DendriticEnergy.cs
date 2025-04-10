@@ -9,7 +9,7 @@ namespace Polarities.Items.Placeable.Blocks.Fractal
     {
         public override void SetStaticDefaults()
         {
-            SacrificeTotal = 100;
+            Item.ResearchUnlockCount = 100;
             ItemID.Sets.SortingPriorityMaterials[Type] = 58;
             ItemID.Sets.ItemNoGravity[Type] = true;
             ItemID.Sets.ItemIconPulse[Type] = true;
@@ -55,7 +55,7 @@ namespace Polarities.Items.Placeable.Blocks.Fractal
             AddMapEntry(new Color(176, 239, 232), CreateMapEntryName());
 
             DustType = 84;
-            ItemDrop = ModContent.ItemType<DendriticEnergy>();
+            ItemDrop/* tModPorter Note: Removed. Tiles and walls will drop the item which places them automatically. Use RegisterItemDrop to alter the automatic drop if necessary. */ = ModContent.ItemType<DendriticEnergy>();
             HitSound = SoundID.Tink;
             MineResist = 4f;
             MinPick = 180;

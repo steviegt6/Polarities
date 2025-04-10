@@ -14,7 +14,7 @@ namespace Polarities.Items.Placeable.Blocks
         {
             ItemID.Sets.SortingPriorityMaterials[Item.type] = ItemID.Sets.SortingPriorityMaterials[ItemID.SandBlock];
 
-            SacrificeTotal = (100);
+            Item.ResearchUnlockCount = (100);
         }
 
         public override void SetDefaults()
@@ -49,7 +49,7 @@ namespace Polarities.Items.Placeable.Blocks
             AddMapEntry(new Color(255, 220, 220));
 
             DustType = DustType<Dusts.SaltDust>();
-            ItemDrop = ItemType<Salt>();
+            ItemDrop/* tModPorter Note: Removed. Tiles and walls will drop the item which places them automatically. Use RegisterItemDrop to alter the automatic drop if necessary. */ = ItemType<Salt>();
 
             HitSound = SoundID.Dig;
         }
@@ -212,7 +212,7 @@ namespace Polarities.Items.Placeable.Blocks
             return false;
         }
 
-        public override void Kill(int timeLeft)
+        public override void OnKill(int timeLeft)
         {
             if (Projectile.owner == Main.myPlayer && !Projectile.noDropItem)
             {

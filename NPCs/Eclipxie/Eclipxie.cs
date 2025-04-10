@@ -40,7 +40,7 @@ namespace Polarities.NPCs.Eclipxie
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Eclipxie");
+            // DisplayName.SetDefault("Eclipxie");
             Main.npcFrameCount[NPC.type] = 8;
         }
 
@@ -69,7 +69,7 @@ namespace Polarities.NPCs.Eclipxie
             Music = MusicLoader.GetMusicSlot(Mod, "Sounds/Music/Eclipxie");
         }
 
-        public override void ScaleExpertStats(int numPlayers, float bossLifeScale)
+        public override void ApplyDifficultyAndPlayerScaling(int numPlayers, float balance, float bossAdjustment)/* tModPorter Note: bossLifeScale -> balance (bossAdjustment is different, see the docs for details) */
         {
             NPC.lifeMax = (int)(NPC.lifeMax * 0.6f * bossLifeScale);
         }
@@ -564,7 +564,7 @@ namespace Polarities.NPCs.Eclipxie
             }
         }
 
-        public override void OnHitPlayer(Player target, int damage, bool crit)
+        public override void OnHitPlayer(Player target, Player.HurtInfo hurtInfo)
         {
             target.AddBuff(BuffID.Frostburn, 150, true);
             target.AddBuff(BuffID.OnFire, 150, true);
@@ -737,7 +737,7 @@ namespace Polarities.NPCs.Eclipxie
                 damage = 0;
         }
 
-        public override bool StrikeNPC(ref double damage, int defense, ref float knockback, int hitDirection, ref bool crit)
+        public override void ModifyIncomingHit(ref NPC.HitModifiers modifiers)
         {
             if (Main.expertMode && (attackCooldown == 0 || NPC.hide) && (NPC.life * 4 < NPC.lifeMax * 3 && numSplitPhases == 0 || NPC.life * 2 < NPC.lifeMax && numSplitPhases == 1 || NPC.life * 4 < NPC.lifeMax && numSplitPhases == 2))
                 return false;
@@ -838,7 +838,7 @@ namespace Polarities.NPCs.Eclipxie
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Sol Moth");
+            // DisplayName.SetDefault("Sol Moth");
             Main.npcFrameCount[NPC.type] = 8;
         }
 
@@ -868,17 +868,17 @@ namespace Polarities.NPCs.Eclipxie
             Music = MusicLoader.GetMusicSlot(Mod, "Sounds/Music/Eclipxie");
         }
 
-        public override void ModifyHitByItem(Player player, Item item, ref int damage, ref float knockback, ref bool crit)
+        public override void ModifyHitByItem(Player player, Item item, ref NPC.HitModifiers modifiers)
         {
             damage /= 2;
         }
 
-        public override void ModifyHitByProjectile(Projectile projectile, ref int damage, ref float knockback, ref bool crit, ref int hitDirection)
+        public override void ModifyHitByProjectile(Projectile projectile, ref NPC.HitModifiers modifiers)
         {
             damage /= 2;
         }
 
-        public override void ScaleExpertStats(int numPlayers, float bossLifeScale)
+        public override void ApplyDifficultyAndPlayerScaling(int numPlayers, float balance, float bossAdjustment)/* tModPorter Note: bossLifeScale -> balance (bossAdjustment is different, see the docs for details) */
         {
             NPC.lifeMax = (int)(NPC.lifeMax * 0.6f * bossLifeScale);
         }
@@ -1042,7 +1042,7 @@ namespace Polarities.NPCs.Eclipxie
             }
         }
 
-        public override void OnHitPlayer(Player target, int damage, bool crit)
+        public override void OnHitPlayer(Player target, Player.HurtInfo hurtInfo)
         {
             target.AddBuff(BuffID.OnFire, 300, true);
         }
@@ -1063,7 +1063,7 @@ namespace Polarities.NPCs.Eclipxie
             return true;
         }
 
-        public override void HitEffect(int hitDirection, double damage)
+        public override void HitEffect(NPC.HitInfo hit)
         {
             if (NPC.life <= 0)
             {
@@ -1109,17 +1109,17 @@ namespace Polarities.NPCs.Eclipxie
             Music = MusicLoader.GetMusicSlot(Mod, "Sounds/Music/Eclipxie");
         }
 
-        public override void ModifyHitByItem(Player player, Item item, ref int damage, ref float knockback, ref bool crit)
+        public override void ModifyHitByItem(Player player, Item item, ref NPC.HitModifiers modifiers)
         {
             damage /= 2;
         }
 
-        public override void ModifyHitByProjectile(Projectile projectile, ref int damage, ref float knockback, ref bool crit, ref int hitDirection)
+        public override void ModifyHitByProjectile(Projectile projectile, ref NPC.HitModifiers modifiers)
         {
             damage /= 2;
         }
 
-        public override void ScaleExpertStats(int numPlayers, float bossLifeScale)
+        public override void ApplyDifficultyAndPlayerScaling(int numPlayers, float balance, float bossAdjustment)/* tModPorter Note: bossLifeScale -> balance (bossAdjustment is different, see the docs for details) */
         {
             NPC.lifeMax = (int)(NPC.lifeMax * 0.6f * bossLifeScale);
         }
@@ -1273,7 +1273,7 @@ namespace Polarities.NPCs.Eclipxie
             }
         }
 
-        public override void OnHitPlayer(Player target, int damage, bool crit)
+        public override void OnHitPlayer(Player target, Player.HurtInfo hurtInfo)
         {
             target.AddBuff(BuffID.Frostburn, 300, true);
         }
@@ -1294,7 +1294,7 @@ namespace Polarities.NPCs.Eclipxie
             return true;
         }
 
-        public override void HitEffect(int hitDirection, double damage)
+        public override void HitEffect(NPC.HitInfo hit)
         {
             if (NPC.life <= 0)
             {
@@ -1313,7 +1313,7 @@ namespace Polarities.NPCs.Eclipxie
         private int timer;
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Eclipse Deathray");
+            // DisplayName.SetDefault("Eclipse Deathray");
         }
 
         public override void SetDefaults()
@@ -1396,7 +1396,7 @@ namespace Polarities.NPCs.Eclipxie
             Projectile.position = npc.Center + (Projectile.position - Projectile.Center);
         }
 
-        public override void OnHitPlayer(Player target, int damage, bool crit)
+        public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
             target.AddBuff(BuffID.OnFire, 300, true);
             target.AddBuff(BuffID.Frostburn, 300, true);
@@ -1419,7 +1419,7 @@ namespace Polarities.NPCs.Eclipxie
         private int timer;
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Solar Deathray");
+            // DisplayName.SetDefault("Solar Deathray");
         }
 
         public override void SetDefaults()
@@ -1502,7 +1502,7 @@ namespace Polarities.NPCs.Eclipxie
             Projectile.position = npc.Center + (Projectile.position - Projectile.Center);
         }
 
-        public override void OnHitPlayer(Player target, int damage, bool crit)
+        public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
             target.AddBuff(BuffID.OnFire, 600, true);
         }
@@ -1524,7 +1524,7 @@ namespace Polarities.NPCs.Eclipxie
         private int timer;
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Lunar Deathray");
+            // DisplayName.SetDefault("Lunar Deathray");
         }
 
         public override void SetDefaults()
@@ -1607,7 +1607,7 @@ namespace Polarities.NPCs.Eclipxie
             Projectile.position = npc.Center + (Projectile.position - Projectile.Center);
         }
 
-        public override void OnHitPlayer(Player target, int damage, bool crit)
+        public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
             target.AddBuff(BuffID.Frostburn, 600, true);
         }
@@ -1626,7 +1626,7 @@ namespace Polarities.NPCs.Eclipxie
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Moon Scythe");
+            // DisplayName.SetDefault("Moon Scythe");
             Main.projFrames[Projectile.type] = 1;
         }
 
@@ -1658,7 +1658,7 @@ namespace Polarities.NPCs.Eclipxie
             SoundEngine.PlaySound(SoundID.Item10, Projectile.position);
             return true;
         }
-        public override void OnHitPlayer(Player target, int damage, bool crit)
+        public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
             SoundEngine.PlaySound(SoundID.Item10, Projectile.position);
         }

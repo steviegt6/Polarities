@@ -33,7 +33,7 @@ namespace Polarities.NPCs.Enemies.HallowInvasion
                     BuffID.OnFire
                 }
             };
-            NPCID.Sets.DebuffImmunitySets.Add(Type, debuffData);
+            NPCID.Sets.DebuffImmunitySets/* tModPorter Removed: See the porting notes in https://github.com/tModLoader/tModLoader/pull/3453 */.Add(Type, debuffData);
 
             PolaritiesNPC.customNPCCapSlot[Type] = NPCCapSlotID.HallowInvasion;
             PolaritiesNPC.npcTypeCap[Type] = 1;
@@ -265,7 +265,7 @@ namespace Polarities.NPCs.Enemies.HallowInvasion
             }
         }
 
-        public override void ModifyHitByProjectile(Projectile projectile, ref int damage, ref float knockback, ref bool crit, ref int hitDirection)
+        public override void ModifyHitByProjectile(Projectile projectile, ref NPC.HitModifiers modifiers)
         {
             if (NPC.localAI[2] != 0)
             {
@@ -273,7 +273,7 @@ namespace Polarities.NPCs.Enemies.HallowInvasion
             }
         }
 
-        public override void ModifyHitByItem(Player player, Item item, ref int damage, ref float knockback, ref bool crit)
+        public override void ModifyHitByItem(Player player, Item item, ref NPC.HitModifiers modifiers)
         {
             if (NPC.localAI[2] != 0)
             {
@@ -408,7 +408,7 @@ namespace Polarities.NPCs.Enemies.HallowInvasion
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("{$Mods.Polarites.ItemName.Sunblade}");
+            // DisplayName.SetDefault("{$Mods.Polarites.ItemName.Sunblade}");
 
             ProjectileID.Sets.TrailCacheLength[Projectile.type] = 15;
             ProjectileID.Sets.TrailingMode[Projectile.type] = 2;

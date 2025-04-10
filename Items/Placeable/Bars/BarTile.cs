@@ -30,7 +30,7 @@ namespace Polarities.Items.Placeable.Bars
             AddMapEntry(new Color(224, 194, 101), Language.GetText("MapObject.MetalBar"));
         }
 
-        public override bool Drop(int i, int j)
+        public override bool Drop(int i, int j)/* tModPorter Note: Removed. Use CanDrop to decide if an item should drop. Use GetItemDrops to decide which item drops. Item drops based on placeStyle are handled automatically now, so this method might be able to be removed altogether. */
         {
             Tile t = Main.tile[i, j];
             int style = t.TileFrameX / 18;
@@ -70,7 +70,7 @@ namespace Polarities.Items.Placeable.Bars
             barIndexToItemType.Add(BarIndex, Type);
             barIndexToDustIndex.Add(BarIndex, DustIndex);
 
-            SacrificeTotal = 25;
+            Item.ResearchUnlockCount = 25;
         }
 
         public override void SetDefaults()

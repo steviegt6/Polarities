@@ -248,7 +248,7 @@ namespace Polarities.NPCs.Enemies.Fractal
             Projectile.rotation = Projectile.velocity.ToRotation() + (float)Math.PI / 2;
         }
 
-        public override void Kill(int timeLeft)
+        public override void OnKill(int timeLeft)
         {
             for (int i = 0; i < 4; i++)
             {

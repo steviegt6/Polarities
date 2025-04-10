@@ -27,7 +27,7 @@ namespace Polarities.Items.Placeable.Furniture
             Lighting.AddLight((int)((Item.position.X + Item.width / 2) / 16f), (int)((Item.position.Y + Item.height / 2) / 16f), 82 / 255f, 179 / 255f, 203 / 255f);
         }
 
-        public override void AutoLightSelect(ref bool dryTorch, ref bool wetTorch, ref bool glowstick)
+        public override void AutoLightSelect(ref bool dryTorch, ref bool wetTorch, ref bool glowstick)/* tModPorter Note: Removed. Use ItemID.Sets.Torches[Type], ItemID.Sets.WaterTorches[Type], and ItemID.Sets.Glowsticks[Type] in SetStaticDefaults */
         {
             wetTorch = true;
         }
@@ -59,7 +59,7 @@ namespace Polarities.Items.Placeable.Furniture
             AddMapEntry(new Color(82, 179, 203), CreateMapEntryName("Stromatolight"));
 
             DustType = 37;
-            ItemDrop = ItemType<Stromatolight>();
+            ItemDrop/* tModPorter Note: Removed. Tiles and walls will drop the item which places them automatically. Use RegisterItemDrop to alter the automatic drop if necessary. */ = ItemType<Stromatolight>();
         }
 
         public override void NumDust(int i, int j, bool fail, ref int num)

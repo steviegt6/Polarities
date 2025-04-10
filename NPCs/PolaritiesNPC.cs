@@ -83,27 +83,27 @@ namespace Polarities.NPCs
 
         public override void Load()
         {
-            On.Terraria.NPC.GetNPCColorTintedByBuffs += NPC_GetNPCColorTintedByBuffs;
+            Terraria.On_NPC.GetNPCColorTintedByBuffs += NPC_GetNPCColorTintedByBuffs;
 
-            IL.Terraria.NPC.StrikeNPC += NPC_StrikeNPC;
+            Terraria.IL_NPC.StrikeNPC += NPC_StrikeNPC;
 
             //counts weird critters
-            IL.Terraria.GameContent.Bestiary.BestiaryDatabaseNPCsPopulator.AddEmptyEntries_CrittersAndEnemies_Automated += BestiaryDatabaseNPCsPopulator_AddEmptyEntries_CrittersAndEnemies_Automated;
-            IL.Terraria.GameContent.Bestiary.NPCWasNearPlayerTracker.ScanWorldForFinds += NPCWasNearPlayerTracker_ScanWorldForFinds;
-            On.Terraria.NPC.HittableForOnHitRewards += NPC_HittableForOnHitRewards;
+            Terraria.GameContent.Bestiary.IL_BestiaryDatabaseNPCsPopulator.AddEmptyEntries_CrittersAndEnemies_Automated += BestiaryDatabaseNPCsPopulator_AddEmptyEntries_CrittersAndEnemies_Automated;
+            Terraria.GameContent.Bestiary.IL_NPCWasNearPlayerTracker.ScanWorldForFinds += NPCWasNearPlayerTracker_ScanWorldForFinds;
+            Terraria.On_NPC.HittableForOnHitRewards += NPC_HittableForOnHitRewards;
 
             //avoid bad spawns
             IL_ChooseSpawn += PolaritiesNPC_IL_ChooseSpawn;
 
             //flawless continuity for EoW
-            On.Terraria.NPC.Transform += NPC_Transform;
+            Terraria.On_NPC.Transform += NPC_Transform;
 
             //force counts things for the radar
-            IL.Terraria.Main.DrawInfoAccs += Main_DrawInfoAccs;
+            Terraria.IL_Main.DrawInfoAccs += Main_DrawInfoAccs;
 
             //allows npcs to spawn in lava
             //moves prismatic lacewings to post-sun-pixie
-            IL.Terraria.NPC.SpawnNPC += NPC_SpawnNPC;
+            Terraria.IL_NPC.SpawnNPC += NPC_SpawnNPC;
         }
 
         public override void Unload()
@@ -180,7 +180,7 @@ namespace Polarities.NPCs
         //modifies enemy spawn pool after other mods for extra compatibility
         private static event ILContext.Manipulator IL_ChooseSpawn
         {
-            add => HookEndpointManager.Modify(typeof(NPCLoader).GetMethod("ChooseSpawn", BindingFlags.Public | BindingFlags.Static), value);
+            add => MonoModHooks.Modify(typeof(NPCLoader).GetMethod("ChooseSpawn", BindingFlags.Public | BindingFlags.Static), value);
             remove => HookEndpointManager.Unmodify(typeof(NPCLoader).GetMethod("ChooseSpawn", BindingFlags.Public | BindingFlags.Static), value);
         }
 
@@ -445,14 +445,14 @@ namespace Polarities.NPCs
             });
         }
 
-        private bool NPC_HittableForOnHitRewards(On.Terraria.NPC.orig_HittableForOnHitRewards orig, NPC self)
+        private bool NPC_HittableForOnHitRewards(Terraria.On_NPC.orig_HittableForOnHitRewards orig, NPC self)
         {
             if (IsBestiaryCritter(self.type) == true) return false;
             if (IsBestiaryCritter(self.type) == false && !self.immortal) return true;
             return orig(self);
         }
 
-        private Color NPC_GetNPCColorTintedByBuffs(On.Terraria.NPC.orig_GetNPCColorTintedByBuffs orig, NPC self, Color npcColor)
+        private Color NPC_GetNPCColorTintedByBuffs(Terraria.On_NPC.orig_GetNPCColorTintedByBuffs orig, NPC self, Color npcColor)
         {
             npcColor = orig(self, npcColor);
             if (self.GetGlobalNPC<PolaritiesNPC>().hammerTimes.Count > 0)
@@ -523,7 +523,7 @@ namespace Polarities.NPCs
             c.Emit(OpCodes.Stloc, 4);
         }
 
-        private void NPC_Transform(On.Terraria.NPC.orig_Transform orig, NPC self, int newType)
+        private void NPC_Transform(Terraria.On_NPC.orig_Transform orig, NPC self, int newType)
         {
             bool flawless = self.GetGlobalNPC<PolaritiesNPC>().flawless;
             Dictionary<int, int> hammerTimes = self.GetGlobalNPC<PolaritiesNPC>().hammerTimes;
@@ -603,7 +603,7 @@ namespace Polarities.NPCs
             return true;
         }
 
-        public override void ModifyHitByProjectile(NPC npc, Projectile projectile, ref int damage, ref float knockback, ref bool crit, ref int hitDirection)
+        public override void ModifyHitByProjectile(NPC npc, Projectile projectile, ref NPC.HitModifiers modifiers)
         {
             if (projectile.IsTypeSummon())
             {
@@ -814,7 +814,7 @@ namespace Polarities.NPCs
             }
         }
 
-        public override bool? CanHitNPC(NPC npc, NPC target)
+        public override bool CanHitNPC(NPC npc, NPC target)/* tModPorter Suggestion: Return true instead of null */
         {
             if (target.type == NPCType<NPCs.TownNPCs.Ghostwriter>() && !(npc.type == NPCID.Wraith || npc.type == NPCID.Ghost || npc.type == NPCID.Reaper || npc.type == NPCID.Poltergeist || npc.type == NPCID.DungeonSpirit))
             {
@@ -1153,7 +1153,7 @@ namespace Polarities.NPCs
             }
         }
 
-        public override bool StrikeNPC(NPC npc, ref double damage, int defense, ref float knockback, int hitDirection, ref bool crit)
+        public override void ModifyIncomingHit(NPC npc, ref NPC.HitModifiers modifiers)
         {
             damage *= neutralTakenDamageMultiplier;
             return true;

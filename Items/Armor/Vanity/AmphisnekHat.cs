@@ -11,7 +11,7 @@ namespace Polarities.Items.Armor.Vanity
     {
         public override void SetStaticDefaults()
         {
-            SacrificeTotal = 1;
+            Item.ResearchUnlockCount = 1;
             ArmorIDs.Head.Sets.DrawHead[Item.headSlot] = true;
             ArmorIDs.Head.Sets.DrawBackHair[Item.headSlot] = true;
             ArmorIDs.Head.Sets.DrawHatHair[Item.headSlot] = true;

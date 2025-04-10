@@ -31,7 +31,7 @@ namespace Polarities.NPCs.Critters
             //spawn gemflies and other misc loot from shaking gem trees
             if (!hasAddedShakeTreeEdit)
             {
-                On.Terraria.WorldGen.ShakeTree += WorldGen_ShakeTree;
+                Terraria.On_WorldGen.ShakeTree += WorldGen_ShakeTree;
                 hasAddedShakeTreeEdit = true;
             }
         }
@@ -75,7 +75,7 @@ namespace Polarities.NPCs.Critters
             }
         }
 
-        private void WorldGen_ShakeTree(On.Terraria.WorldGen.orig_ShakeTree orig, int i, int j)
+        private void WorldGen_ShakeTree(Terraria.On_WorldGen.orig_ShakeTree orig, int i, int j)
         {
             List<int> gemTrees = new List<int> { TileID.TreeAmethyst, TileID.TreeTopaz, TileID.TreeSapphire, TileID.TreeEmerald, TileID.TreeRuby, TileID.TreeDiamond };
 
@@ -289,7 +289,7 @@ namespace Polarities.NPCs.Critters
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("{$Mods.Polarities.NPCName.Gemfly}");
+            // DisplayName.SetDefault("{$Mods.Polarities.NPCName.Gemfly}");
 
             Main.npcFrameCount[Type] = Main.npcFrameCount[NPCID.LightningBug] * 6;
             Main.npcCatchable[Type] = true;
@@ -410,10 +410,10 @@ namespace Polarities.NPCs.Critters
 
         public override void SetStaticDefaults()
         {
-            SacrificeTotal = (5);
+            Item.ResearchUnlockCount = (5);
 
-            DisplayName.SetDefault(Lang.GetItemNameValue(GemItem) + "{$Mods.Polarities.ItemName.GemflyItem}");
-            Tooltip.SetDefault("{$Mods.Polarities.ItemTooltip.GemflyItem}");
+            // DisplayName.SetDefault(Lang.GetItemNameValue(GemItem) + "{$Mods.Polarities.ItemName.GemflyItem}");
+            // Tooltip.SetDefault("{$Mods.Polarities.ItemTooltip.GemflyItem}");
         }
 
         public override void SetDefaults()

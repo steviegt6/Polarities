@@ -32,7 +32,7 @@ namespace Polarities.NPCs.Enemies.LavaOcean
                     BuffType<Incinerating>()
                 }
             };
-            NPCID.Sets.DebuffImmunitySets.Add(Type, debuffData);
+            NPCID.Sets.DebuffImmunitySets/* tModPorter Removed: See the porting notes in https://github.com/tModLoader/tModLoader/pull/3453 */.Add(Type, debuffData);
 
             NPCID.Sets.NPCBestiaryDrawModifiers drawModifiers = new NPCID.Sets.NPCBestiaryDrawModifiers(0)
             {
@@ -145,7 +145,7 @@ namespace Polarities.NPCs.Enemies.LavaOcean
             }
         }
 
-        public override void HitEffect(int hitDirection, double damage)
+        public override void HitEffect(NPC.HitInfo hit)
         {
             //adapted from the vanilla weapon eneimies
             if (NPC.life > 0)
@@ -179,7 +179,7 @@ namespace Polarities.NPCs.Enemies.LavaOcean
             gore28.velocity *= 0.5f;
         }
 
-        public override void OnHitPlayer(Player target, int damage, bool crit)
+        public override void OnHitPlayer(Player target, Player.HurtInfo hurtInfo)
         {
             target.AddBuff(BuffID.OnFire, 60);
         }

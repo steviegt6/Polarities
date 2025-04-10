@@ -16,7 +16,7 @@ namespace Polarities.Items.Placeable.Furniture
 
         public override void SetStaticDefaults()
         {
-            SacrificeTotal = (1);
+            Item.ResearchUnlockCount = (1);
         }
 
         public override void SetDefaults()
@@ -52,7 +52,7 @@ namespace Polarities.Items.Placeable.Furniture
 
             DustType = MyDustType;
             AdjTiles = new int[] { TileID.ClosedDoor };
-            OpenDoorID = OpenVersion;
+            OpenDoorID/* tModPorter Note: Removed. Use TileID.Sets.OpenDoorID instead */ = OpenVersion;
 
             // Names
             AddMapEntry(MapColor, Language.GetText("MapObject.Door"));
@@ -125,7 +125,7 @@ namespace Polarities.Items.Placeable.Furniture
 
             DustType = MyDustType;
             AdjTiles = new int[] { TileID.OpenDoor };
-            CloseDoorID = ClosedVersion;
+            CloseDoorID/* tModPorter Note: Removed. Use TileID.Sets.CloseDoorID instead */ = ClosedVersion;
 
             // Names
             AddMapEntry(MapColor, Language.GetText("MapObject.Door"));

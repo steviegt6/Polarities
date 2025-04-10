@@ -12,7 +12,7 @@ namespace Polarities.Items.Weapons.Ranged.Ammo
     {
         public override void SetStaticDefaults()
         {
-            SacrificeTotal = (99);
+            Item.ResearchUnlockCount = (99);
         }
 
         public override void SetDefaults()
@@ -50,7 +50,7 @@ namespace Polarities.Items.Weapons.Ranged.Ammo
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("{$Mods.Polarities.ItemName.VenomDart}");
+            // DisplayName.SetDefault("{$Mods.Polarities.ItemName.VenomDart}");
         }
 
         public override void SetDefaults()
@@ -86,7 +86,7 @@ namespace Polarities.Items.Weapons.Ranged.Ammo
             if (Projectile.velocity.Y > 16) Projectile.velocity.Y = 16;
         }
 
-        public override void Kill(int timeLeft)
+        public override void OnKill(int timeLeft)
         {
             for (int i = 0; i < 16; i++)
             {
@@ -94,12 +94,12 @@ namespace Polarities.Items.Weapons.Ranged.Ammo
             }
         }
 
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             target.AddBuff(BuffID.Venom, 300);
         }
 
-        public override void OnHitPvp(Player target, int damage, bool crit)
+        public override void OnHitPvp(Player target, int damage, bool crit)/* tModPorter Note: Removed. Use OnHitPlayer and check info.PvP */
         {
             target.AddBuff(BuffID.Venom, 300);
         }
@@ -142,12 +142,12 @@ namespace Polarities.Items.Weapons.Ranged.Ammo
             }
         }
 
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             target.AddBuff(BuffID.Venom, 120);
         }
 
-        public override void OnHitPvp(Player target, int damage, bool crit)
+        public override void OnHitPvp(Player target, int damage, bool crit)/* tModPorter Note: Removed. Use OnHitPlayer and check info.PvP */
         {
             target.AddBuff(BuffID.Venom, 120);
         }

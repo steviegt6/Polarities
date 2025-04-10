@@ -21,7 +21,7 @@ namespace Polarities.Items.Placeable.Furniture
 
         public override void SetStaticDefaults()
         {
-            SacrificeTotal = (100);
+            Item.ResearchUnlockCount = (100);
         }
 
         public override void SetDefaults()
@@ -51,7 +51,7 @@ namespace Polarities.Items.Placeable.Furniture
             Lighting.AddLight((int)((Item.position.X + Item.width / 2) / 16f), (int)((Item.position.Y + Item.height / 2) / 16f), LightColor.R / 255f, LightColor.G / 255f, LightColor.B / 255f);
         }
 
-        public override void AutoLightSelect(ref bool dryTorch, ref bool wetTorch, ref bool glowstick)
+        public override void AutoLightSelect(ref bool dryTorch, ref bool wetTorch, ref bool glowstick)/* tModPorter Note: Removed. Use ItemID.Sets.Torches[Type], ItemID.Sets.WaterTorches[Type], and ItemID.Sets.Glowsticks[Type] in SetStaticDefaults */
         {
             if (WaterDeath)
             {
@@ -159,7 +159,7 @@ namespace Polarities.Items.Placeable.Furniture
 
             AddMapEntry(MapColor, Lang.GetItemName(ItemID.Torch));
             DustType = MyDustType;
-            ItemDrop = DropItem;
+            ItemDrop/* tModPorter Note: Removed. Tiles and walls will drop the item which places them automatically. Use RegisterItemDrop to alter the automatic drop if necessary. */ = DropItem;
             AdjTiles = new int[] { TileID.Torches };
         }
 

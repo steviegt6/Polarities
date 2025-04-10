@@ -17,7 +17,7 @@ namespace Polarities.Items.Placeable.Furniture
 
         public override void SetStaticDefaults()
         {
-            SacrificeTotal = (1);
+            Item.ResearchUnlockCount = (1);
         }
 
         public override void SetDefaults()
@@ -55,18 +55,18 @@ namespace Polarities.Items.Placeable.Furniture
             if (ChestName == null)
                 TileID.Sets.BasicChest[Type] = true;
             else
-                ContainerName.SetDefault(ChestName);
+                ContainerName/* tModPorter Note: Removed. Override DefaultContainerName instead */.SetDefault(ChestName);
 
             DustType = MyDustType;
             AdjTiles = new int[] { TileID.Containers };
-            ChestDrop = DropItem;
+            ItemDrop/* tModPorter Note: Removed. Tiles and walls will drop the item which places them automatically. Use RegisterItemDrop to alter the automatic drop if necessary. */ = DropItem;
 
-            ModTranslation name = CreateMapEntryName();
-            name.SetDefault(ChestName);
+            LocalizedText name = CreateMapEntryName();
+            // name.SetDefault(ChestName);
             AddMapEntry(MapColor, name, MapChestName);
 
             name = CreateMapEntryName(Name + "_Locked");
-            name.SetDefault("{$Mods.Polarities.MapObject.LockedChest}" + ChestName);
+            // name.SetDefault("{$Mods.Polarities.MapObject.LockedChest}" + ChestName);
             AddMapEntry(MapColorLocked, name, MapChestName);
 
             // Placement
@@ -133,7 +133,7 @@ namespace Polarities.Items.Placeable.Furniture
 
         public override void KillMultiTile(int i, int j, int frameX, int frameY)
         {
-            Item.NewItem(new EntitySource_TileBreak(i, j), i * 16, j * 16, 32, 32, ChestDrop);
+            Item.NewItem(new EntitySource_TileBreak(i, j), i * 16, j * 16, 32, 32, ItemDrop/* tModPorter Note: Removed. Tiles and walls will drop the item which places them automatically. Use RegisterItemDrop to alter the automatic drop if necessary. */);
             Chest.DestroyChest(i, j);
         }
 
@@ -200,7 +200,7 @@ namespace Polarities.Items.Placeable.Furniture
                         {
                             if (Main.netMode == NetmodeID.MultiplayerClient)
                             {
-                                NetMessage.SendData(MessageID.Unlock, -1, -1, null, player.whoAmI, 1f, left, top);
+                                NetMessage.SendData(MessageID.LockAndUnlock, -1, -1, null, player.whoAmI, 1f, left, top);
                             }
                         }
                     }

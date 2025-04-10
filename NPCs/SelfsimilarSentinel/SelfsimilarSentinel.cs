@@ -287,7 +287,7 @@ namespace Polarities.NPCs.SelfsimilarSentinel
 
 		public override void SetStaticDefaults()
 		{
-			DisplayName.SetDefault("Selfsimilar Sentinel");
+			// DisplayName.SetDefault("Selfsimilar Sentinel");
 			Main.npcFrameCount[NPC.type] = 5;
 			NPCID.Sets.MustAlwaysDraw[NPC.type] = true;
 		}
@@ -314,7 +314,7 @@ namespace Polarities.NPCs.SelfsimilarSentinel
 			Music = MusicLoader.GetMusicSlot(Mod, "Sounds/Music/SentinelP1");
 		}
 
-        public override void ScaleExpertStats(int numPlayers, float bossLifeScale)
+        public override void ApplyDifficultyAndPlayerScaling(int numPlayers, float balance, float bossAdjustment)/* tModPorter Note: bossLifeScale -> balance (bossAdjustment is different, see the docs for details) */
 		{
 			NPC.lifeMax = (int)(64000 * bossLifeScale);
 		}
@@ -690,15 +690,15 @@ namespace Polarities.NPCs.SelfsimilarSentinel
 								}
 								Main.LocalPlayer.wingTime = Main.LocalPlayer.wingTimeMax;
 								Main.LocalPlayer.rocketTime = Main.LocalPlayer.rocketTimeMax;
-								Main.LocalPlayer.canJumpAgain_Blizzard = true;
-								Main.LocalPlayer.canJumpAgain_Cloud = true;
-								Main.LocalPlayer.canJumpAgain_Fart = true;
-								Main.LocalPlayer.canJumpAgain_Sail = true;
-								Main.LocalPlayer.canJumpAgain_Sandstorm = true;
-								Main.LocalPlayer.canJumpAgain_Unicorn = true;
-								Main.LocalPlayer.canJumpAgain_WallOfFleshGoat = true;
-								Main.LocalPlayer.canJumpAgain_Santank = true;
-								Main.LocalPlayer.canJumpAgain_Basilisk = true;
+								Main.LocalPlayer.GetJumpState(ExtraJump.BlizzardInABottle).Available = true;
+								Main.LocalPlayer.GetJumpState(ExtraJump.CloudInABottle).Available = true;
+								Main.LocalPlayer.GetJumpState(ExtraJump.FartInAJar).Available = true;
+								Main.LocalPlayer.GetJumpState(ExtraJump.TsunamiInABottle).Available = true;
+								Main.LocalPlayer.GetJumpState(ExtraJump.SandstormInABottle).Available = true;
+								Main.LocalPlayer.GetJumpState(ExtraJump.UnicornMount).Available = true;
+								Main.LocalPlayer.GetJumpState(ExtraJump.GoatMount).Available = true;
+								Main.LocalPlayer.GetJumpState(ExtraJump.SantankMount).Available = true;
+								Main.LocalPlayer.GetJumpState(ExtraJump.BasiliskMount).Available = true;
 								Main.LocalPlayer.jump = 15;
 								if (Main.LocalPlayer.wet && Main.LocalPlayer.merman) Main.LocalPlayer.jump = 30;
 								Main.LocalPlayer.UpdateJumpHeight();
@@ -2091,7 +2091,7 @@ namespace Polarities.NPCs.SelfsimilarSentinel
 
 		public override void SetStaticDefaults()
 		{
-			DisplayName.SetDefault("Selfsimilar Sentinel");
+			// DisplayName.SetDefault("Selfsimilar Sentinel");
 		}
 
 		public override void SetDefaults()
@@ -2247,7 +2247,7 @@ namespace Polarities.NPCs.SelfsimilarSentinel
 	{
 		public override void SetStaticDefaults()
 		{
-			DisplayName.SetDefault("Hyperbolic Bolt");
+			// DisplayName.SetDefault("Hyperbolic Bolt");
 
 			ProjectileID.Sets.TrailCacheLength[Projectile.type] = 10;
 			ProjectileID.Sets.TrailingMode[Projectile.type] = 2;
@@ -2523,7 +2523,7 @@ namespace Polarities.NPCs.SelfsimilarSentinel
 	{
 		public override void SetStaticDefaults()
 		{
-			DisplayName.SetDefault("Hyperbolic Ray");
+			// DisplayName.SetDefault("Hyperbolic Ray");
 		}
 
 		public override void SetDefaults()
@@ -2829,7 +2829,7 @@ namespace Polarities.NPCs.SelfsimilarSentinel
 	{
         public override void SetStaticDefaults()
 		{
-			DisplayName.SetDefault("Hyperbolic Pulse");
+			// DisplayName.SetDefault("Hyperbolic Pulse");
 
 			/*Texture2D texture = new Texture2D(Main.spriteBatch.GraphicsDevice, 4096, 4096, false, SurfaceFormat.Color);
 			System.Collections.Generic.List<Color> list = new System.Collections.Generic.List<Color>();
@@ -3152,7 +3152,7 @@ namespace Polarities.NPCs.SelfsimilarSentinel
 
         public override void SetStaticDefaults()
 		{
-			DisplayName.SetDefault("Hyperbolic Pulse");
+			// DisplayName.SetDefault("Hyperbolic Pulse");
 		}
 
 		public override void SetDefaults()
@@ -3289,7 +3289,7 @@ namespace Polarities.NPCs.SelfsimilarSentinel
 
         public override void SetStaticDefaults()
 		{
-			DisplayName.SetDefault("Hyperbolic Wisp");
+			// DisplayName.SetDefault("Hyperbolic Wisp");
 
 			ProjectileID.Sets.TrailCacheLength[Projectile.type] = 10;
 			ProjectileID.Sets.TrailingMode[Projectile.type] = 2;
@@ -3460,7 +3460,7 @@ namespace Polarities.NPCs.SelfsimilarSentinel
 
         public override void SetStaticDefaults()
 		{
-			DisplayName.SetDefault("Selfsimilar Ore Cunk");
+			// DisplayName.SetDefault("Selfsimilar Ore Cunk");
 
 			Main.projFrames[Projectile.type] = 4;
 		}

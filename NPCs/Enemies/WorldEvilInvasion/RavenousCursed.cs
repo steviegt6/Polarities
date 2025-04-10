@@ -27,7 +27,7 @@ namespace Polarities.NPCs.Enemies.WorldEvilInvasion
                     BuffID.Confused
                 }
             };
-            NPCID.Sets.DebuffImmunitySets.Add(Type, debuffData);
+            NPCID.Sets.DebuffImmunitySets/* tModPorter Removed: See the porting notes in https://github.com/tModLoader/tModLoader/pull/3453 */.Add(Type, debuffData);
 
             PolaritiesNPC.customNPCCapSlot[Type] = NPCCapSlotID.WorldEvilInvasionWorm;
 
@@ -419,7 +419,7 @@ namespace Polarities.NPCs.Enemies.WorldEvilInvasion
             Main.dust[dust].noGravity = true;
         }
 
-        public override void OnHitPlayer(Player target, int damage, bool crit)
+        public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
             target.AddBuff(BuffID.CursedInferno, 60 * 8);
         }
@@ -450,7 +450,7 @@ namespace Polarities.NPCs.Enemies.WorldEvilInvasion
             Projectile.velocity *= 0.95f;
         }
 
-        public override void OnHitPlayer(Player target, int damage, bool crit)
+        public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
             target.AddBuff(BuffID.CursedInferno, 60 * 8);
         }

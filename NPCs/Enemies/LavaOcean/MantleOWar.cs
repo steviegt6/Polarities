@@ -37,7 +37,7 @@ namespace Polarities.NPCs.Enemies.LavaOcean
                     BuffType<Incinerating>()
                 }
             };
-            NPCID.Sets.DebuffImmunitySets.Add(Type, debuffData);
+            NPCID.Sets.DebuffImmunitySets/* tModPorter Removed: See the porting notes in https://github.com/tModLoader/tModLoader/pull/3453 */.Add(Type, debuffData);
         }
 
         public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
@@ -329,7 +329,7 @@ namespace Polarities.NPCs.Enemies.LavaOcean
             }
         }
 
-        public override void OnHitPlayer(Player target, int damage, bool crit)
+        public override void OnHitPlayer(Player target, Player.HurtInfo hurtInfo)
         {
             target.AddBuff(BuffType<Incinerating>(), 60, true);
         }
@@ -408,7 +408,7 @@ namespace Polarities.NPCs.Enemies.LavaOcean
             Main.dust[Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.Lava, Scale: 1.5f)].noGravity = true;
         }
 
-        public override void OnHitPlayer(Player target, int damage, bool crit)
+        public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
             target.AddBuff(BuffType<Incinerating>(), 60, true);
         }
@@ -425,7 +425,7 @@ namespace Polarities.NPCs.Enemies.LavaOcean
             return true;
         }
 
-        public override void Kill(int timeLeft)
+        public override void OnKill(int timeLeft)
         {
             SoundEngine.PlaySound(SoundID.NPCHit9, Projectile.Center);
             for (int i = 0; i < 16; i++)
@@ -461,7 +461,7 @@ namespace Polarities.NPCs.Enemies.LavaOcean
             Projectile.hide = true;
         }
 
-        public override void OnHitPlayer(Player target, int damage, bool crit)
+        public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
             target.AddBuff(BuffType<Incinerating>(), 60, true);
         }

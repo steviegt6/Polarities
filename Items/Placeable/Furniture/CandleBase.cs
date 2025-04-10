@@ -14,7 +14,7 @@ namespace Polarities.Items.Placeable.Furniture
 
         public override void SetStaticDefaults()
         {
-            SacrificeTotal = (1);
+            Item.ResearchUnlockCount = (1);
         }
 
         public override void SetDefaults()
@@ -54,7 +54,7 @@ namespace Polarities.Items.Placeable.Furniture
             AddToArray(ref TileID.Sets.RoomNeeds.CountsAsTorch);
 
             DustType = MyDustType;
-            ItemDrop = DropItem;
+            ItemDrop/* tModPorter Note: Removed. Tiles and walls will drop the item which places them automatically. Use RegisterItemDrop to alter the automatic drop if necessary. */ = DropItem;
 
             AddMapEntry(MapColor, Lang.GetItemName(ItemID.Candle));
         }

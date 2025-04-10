@@ -10,7 +10,7 @@ namespace Polarities.Items.Placeable.Blocks.Fractal
     {
         public override void SetStaticDefaults()
         {
-            SacrificeTotal = 100;
+            Item.ResearchUnlockCount = 100;
         }
 
         public override void SetDefaults()
@@ -49,7 +49,7 @@ namespace Polarities.Items.Placeable.Blocks.Fractal
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Fractal Brick Wall");
+            // DisplayName.SetDefault("Fractal Brick Wall");
         }
 
         public override void SetDefaults()
@@ -88,7 +88,7 @@ namespace Polarities.Items.Placeable.Blocks.Fractal
             AddMapEntry(new Color(73, 143, 170));
 
             DustType = 116;
-            ItemDrop = ModContent.ItemType<FractalBrick>();
+            ItemDrop/* tModPorter Note: Removed. Tiles and walls will drop the item which places them automatically. Use RegisterItemDrop to alter the automatic drop if necessary. */ = ModContent.ItemType<FractalBrick>();
             HitSound = SoundID.Tink;
             MineResist = 3f;
             MinPick = 100;
@@ -143,7 +143,7 @@ namespace Polarities.Items.Placeable.Blocks.Fractal
         {
             Main.wallHouse[Type] = true;
             AddMapEntry(new Color(43, 86, 102));
-            ItemDrop = ModContent.ItemType<FractalBrickWall>();
+            ItemDrop/* tModPorter Note: Removed. Tiles and walls will drop the item which places them automatically. Use RegisterItemDrop to alter the automatic drop if necessary. */ = ModContent.ItemType<FractalBrickWall>();
         }
 
         public override void NumDust(int i, int j, bool fail, ref int num)

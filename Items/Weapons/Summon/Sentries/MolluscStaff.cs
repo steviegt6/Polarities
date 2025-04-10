@@ -13,7 +13,7 @@ namespace Polarities.Items.Weapons.Summon.Sentries
     {
         public override void SetStaticDefaults()
         {
-            SacrificeTotal = (1);
+            Item.ResearchUnlockCount = (1);
         }
 
         public override void SetDefaults()
@@ -213,7 +213,7 @@ namespace Polarities.Items.Weapons.Summon.Sentries
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("{$Mods.Polarities.ProjectileName.MusselProjectile}");
+            // DisplayName.SetDefault("{$Mods.Polarities.ProjectileName.MusselProjectile}");
             ProjectileID.Sets.SentryShot[Projectile.type] = true;
         }
 
@@ -261,7 +261,7 @@ namespace Polarities.Items.Weapons.Summon.Sentries
             return false;
         }
 
-        public override void Kill(int timeLeft)
+        public override void OnKill(int timeLeft)
         {
             SoundEngine.PlaySound(SoundID.Shatter, Projectile.Center);
             for (int i = 0; i < 3; i++)

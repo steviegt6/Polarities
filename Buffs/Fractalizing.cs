@@ -12,7 +12,7 @@ namespace Polarities.Buffs
             Main.buffNoSave[Type] = true;
         }
 
-        public override void ModifyBuffTip(ref string tip, ref int rare)
+        public override void ModifyBuffText(ref string buffName, ref string tip, ref int rare)
         {
             if (!FractalSubworld.Active)
             {

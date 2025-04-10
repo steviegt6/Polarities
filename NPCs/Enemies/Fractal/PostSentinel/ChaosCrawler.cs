@@ -23,7 +23,7 @@ namespace Polarities.NPCs.Enemies.Fractal.PostSentinel
         public override void SetStaticDefaults()
         {
             Main.npcFrameCount[Type] = 3;
-            NPCID.Sets.DebuffImmunitySets[Type] = new NPCDebuffImmunityData()
+            NPCID.Sets.DebuffImmunitySets/* tModPorter Removed: See the porting notes in https://github.com/tModLoader/tModLoader/pull/3453 */[Type] = new NPCDebuffImmunityData()
             {
                 SpecificallyImmuneTo = new int[]
                 {
@@ -570,7 +570,7 @@ namespace Polarities.NPCs.Enemies.Fractal.PostSentinel
             Projectile.rotation = Projectile.velocity.ToRotation() + (float)Math.PI / 2;
         }
 
-        public override void Kill(int timeLeft)
+        public override void OnKill(int timeLeft)
         {
             for (int i = 0; i < 4; i++)
             {

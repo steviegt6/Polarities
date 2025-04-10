@@ -26,7 +26,7 @@ namespace Polarities.NPCs.Enemies.Granite
                     BuffID.Confused
                 }
             };
-            NPCID.Sets.DebuffImmunitySets.Add(Type, debuffData);
+            NPCID.Sets.DebuffImmunitySets/* tModPorter Removed: See the porting notes in https://github.com/tModLoader/tModLoader/pull/3453 */.Add(Type, debuffData);
 
             MultiHitboxNPC.MultiHitboxNPCTypes.Add(Type);
         }
@@ -330,7 +330,7 @@ namespace Polarities.NPCs.Enemies.Granite
             //TODO: npcLoot.Add(ItemDropRule.Common(ItemType<BlueQuartz>(), 2, 1, 2));
         }
 
-        public override void ModifyHitPlayer(Player target, ref int damage, ref bool crit)
+        public override void ModifyHitPlayer(Player target, ref Player.HurtModifiers modifiers)
         {
             if (NPC.GetGlobalNPC<MultiHitboxNPC>().mostRecentHitbox.index != 0)
             {
@@ -338,7 +338,7 @@ namespace Polarities.NPCs.Enemies.Granite
             }
         }
 
-        public override void ModifyHitNPC(NPC target, ref int damage, ref float knockback, ref bool crit)
+        public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
         {
             if (NPC.GetGlobalNPC<MultiHitboxNPC>().mostRecentHitbox.index != 0)
             {

@@ -28,7 +28,7 @@ namespace Polarities.NPCs.Enemies
                     BuffID.OnFire
                 }
             };
-            NPCID.Sets.DebuffImmunitySets.Add(Type, debuffData);
+            NPCID.Sets.DebuffImmunitySets/* tModPorter Removed: See the porting notes in https://github.com/tModLoader/tModLoader/pull/3453 */.Add(Type, debuffData);
 
             MultiHitboxNPC.MultiHitboxNPCTypes.Add(Type);
         }
@@ -189,7 +189,7 @@ namespace Polarities.NPCs.Enemies
             NPC.GetGlobalNPC<MultiHitboxNPC>().AssignHitboxFrom(hitboxes);
         }
 
-        public override void ModifyHitPlayer(Player target, ref int damage, ref bool crit)
+        public override void ModifyHitPlayer(Player target, ref Player.HurtModifiers modifiers)
         {
             if (NPC.GetGlobalNPC<MultiHitboxNPC>().mostRecentHitbox.index == 0)
             {
@@ -201,7 +201,7 @@ namespace Polarities.NPCs.Enemies
             }
         }
 
-        public override void ModifyHitNPC(NPC target, ref int damage, ref float knockback, ref bool crit)
+        public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
         {
             if (NPC.GetGlobalNPC<MultiHitboxNPC>().mostRecentHitbox.index == 0)
             {

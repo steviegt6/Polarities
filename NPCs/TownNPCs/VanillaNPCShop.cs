@@ -20,10 +20,10 @@ namespace Polarities.NPCs
     {
         public override void Load()
         {
-            IL.Terraria.Main.HelpText += Main_HelpText;
+            Terraria.IL_Main.HelpText += Main_HelpText;
         }
 
-        public override void SetupShop(int type, Chest shop, ref int nextSlot)
+        public override void ModifyActiveShop(NPC npc, string shopName, Item[] items)
         {
             switch (type)
             {

@@ -16,7 +16,7 @@ namespace Polarities.Items.Placeable.Blocks.Fractal
     {
         public override void SetStaticDefaults()
         {
-            SacrificeTotal = 100;
+            Item.ResearchUnlockCount = 100;
         }
 
         public override void SetDefaults()
@@ -44,7 +44,7 @@ namespace Polarities.Items.Placeable.Blocks.Fractal
             Main.tileAxe[Type] = true;
 
             DustType = 37;
-            ItemDrop = ModContent.ItemType<Fractus>();
+            ItemDrop/* tModPorter Note: Removed. Tiles and walls will drop the item which places them automatically. Use RegisterItemDrop to alter the automatic drop if necessary. */ = ModContent.ItemType<Fractus>();
             //TileID.Sets.DisableSmartCursor[Type] = true;
 
             HitSound = SoundID.Dig;
@@ -135,7 +135,7 @@ namespace Polarities.Items.Placeable.Blocks.Fractal
             Main.tileAxe[Type] = true;
 
             DustType = 37;
-            ItemDrop = ModContent.ItemType<Fractus>();
+            ItemDrop/* tModPorter Note: Removed. Tiles and walls will drop the item which places them automatically. Use RegisterItemDrop to alter the automatic drop if necessary. */ = ModContent.ItemType<Fractus>();
             TileID.Sets.DisableSmartCursor[Type] = true;
 
             HitSound = SoundID.Dig;
@@ -275,7 +275,7 @@ namespace Polarities.Items.Placeable.Blocks.Fractal
             Main.tileAxe[Type] = true;
 
             DustType = 37;
-            ItemDrop = ModContent.ItemType<Fractus>();
+            ItemDrop/* tModPorter Note: Removed. Tiles and walls will drop the item which places them automatically. Use RegisterItemDrop to alter the automatic drop if necessary. */ = ModContent.ItemType<Fractus>();
             TileID.Sets.DisableSmartCursor[Type] = true;
 
             HitSound = SoundID.Dig;
@@ -415,7 +415,7 @@ namespace Polarities.Items.Placeable.Blocks.Fractal
             Main.tileAxe[Type] = true;
 
             DustType = 37;
-            ItemDrop = ModContent.ItemType<Fractus>();
+            ItemDrop/* tModPorter Note: Removed. Tiles and walls will drop the item which places them automatically. Use RegisterItemDrop to alter the automatic drop if necessary. */ = ModContent.ItemType<Fractus>();
             TileID.Sets.DisableSmartCursor[Type] = true;
 
             HitSound = SoundID.Dig;
@@ -556,7 +556,7 @@ namespace Polarities.Items.Placeable.Blocks.Fractal
             Main.tileLighted[Type] = true;
 
             DustType = 37;
-            ItemDrop = ModContent.ItemType<FractusFruit>();
+            ItemDrop/* tModPorter Note: Removed. Tiles and walls will drop the item which places them automatically. Use RegisterItemDrop to alter the automatic drop if necessary. */ = ModContent.ItemType<FractusFruit>();
             TileID.Sets.DisableSmartCursor[Type] = true;
 
             HitSound = SoundID.Dig;
@@ -612,7 +612,7 @@ namespace Polarities.Items.Placeable.Blocks.Fractal
             Main.tileLighted[Type] = true;
 
             DustType = 37;
-            ItemDrop = ModContent.ItemType<FractusFruit>();
+            ItemDrop/* tModPorter Note: Removed. Tiles and walls will drop the item which places them automatically. Use RegisterItemDrop to alter the automatic drop if necessary. */ = ModContent.ItemType<FractusFruit>();
             TileID.Sets.DisableSmartCursor[Type] = true;
 
             HitSound = SoundID.Dig;
@@ -666,7 +666,7 @@ namespace Polarities.Items.Placeable.Blocks.Fractal
             Main.tileLighted[Type] = true;
 
             DustType = 37;
-            ItemDrop = ModContent.ItemType<Fractus>();
+            ItemDrop/* tModPorter Note: Removed. Tiles and walls will drop the item which places them automatically. Use RegisterItemDrop to alter the automatic drop if necessary. */ = ModContent.ItemType<Fractus>();
             TileID.Sets.DisableSmartCursor[Type] = true;
 
             HitSound = SoundID.Dig;

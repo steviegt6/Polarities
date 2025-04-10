@@ -12,7 +12,7 @@ namespace Polarities.Items.Weapons.Ranged.Ammo
     {
         public override void SetStaticDefaults()
         {
-            SacrificeTotal = (99);
+            Item.ResearchUnlockCount = (99);
         }
 
         public override void SetDefaults()
@@ -87,12 +87,12 @@ namespace Polarities.Items.Weapons.Ranged.Ammo
             }
         }
 
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             Projectile.ai[0] = 1;
         }
 
-        public override void OnHitPvp(Player target, int damage, bool crit)
+        public override void OnHitPvp(Player target, int damage, bool crit)/* tModPorter Note: Removed. Use OnHitPlayer and check info.PvP */
         {
             Projectile.ai[0] = 1;
         }

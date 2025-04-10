@@ -10,9 +10,9 @@ namespace Polarities.Items.Placeable.Walls
     {
         public override void SetDefaults()
         {
-            Item.DefaultToPlacableWall((ushort)WallType<LimestoneWallPlaced>());
+            Item.DefaultToPlaceableWall((ushort)WallType<LimestoneWallPlaced>());
 
-            SacrificeTotal = (400);
+            Item.ResearchUnlockCount = (400);
         }
 
         public override void AddRecipes()
@@ -29,7 +29,7 @@ namespace Polarities.Items.Placeable.Walls
         public override void SetStaticDefaults()
         {
             Main.wallHouse[Type] = true;
-            ItemDrop = ItemType<LimestoneWall>();
+            ItemDrop/* tModPorter Note: Removed. Tiles and walls will drop the item which places them automatically. Use RegisterItemDrop to alter the automatic drop if necessary. */ = ItemType<LimestoneWall>();
             AddMapEntry(new Color(34, 50, 30));
 
             DustType = DustType<Dusts.LimestoneDust>();

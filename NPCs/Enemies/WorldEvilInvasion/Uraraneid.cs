@@ -28,7 +28,7 @@ namespace Polarities.NPCs.Enemies.WorldEvilInvasion
                     BuffID.Confused,
                 }
             };
-            NPCID.Sets.DebuffImmunitySets.Add(Type, debuffData);
+            NPCID.Sets.DebuffImmunitySets/* tModPorter Removed: See the porting notes in https://github.com/tModLoader/tModLoader/pull/3453 */.Add(Type, debuffData);
 
             PolaritiesNPC.npcTypeCap[Type] = 1;
             PolaritiesNPC.customNPCCapSlot[Type] = NPCCapSlotID.WorldEvilInvasion;

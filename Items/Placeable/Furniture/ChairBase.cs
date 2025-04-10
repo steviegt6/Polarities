@@ -16,7 +16,7 @@ namespace Polarities.Items.Placeable.Furniture
 
         public override void SetStaticDefaults()
         {
-            SacrificeTotal = (1);
+            Item.ResearchUnlockCount = (1);
         }
 
         public override void SetDefaults()
@@ -41,7 +41,7 @@ namespace Polarities.Items.Placeable.Furniture
             {
                 StaticLoaded = true;
 
-                On.Terraria.GameContent.PlayerSittingHelper.GetSittingTargetInfo += PlayerSittingHelper_GetSittingTargetInfo;
+                Terraria.GameContent.On_PlayerSittingHelper.GetSittingTargetInfo += PlayerSittingHelper_GetSittingTargetInfo;
             }
         }
 
@@ -50,7 +50,7 @@ namespace Polarities.Items.Placeable.Furniture
             IsChairTileBase = null;
         }
 
-        private bool PlayerSittingHelper_GetSittingTargetInfo(On.Terraria.GameContent.PlayerSittingHelper.orig_GetSittingTargetInfo orig, Player player, int x, int y, out int targetDirection, out Vector2 playerSittingPosition, out Vector2 seatDownOffset)
+        private bool PlayerSittingHelper_GetSittingTargetInfo(Terraria.GameContent.On_PlayerSittingHelper.orig_GetSittingTargetInfo orig, Player player, int x, int y, out int targetDirection, out Vector2 playerSittingPosition, out Vector2 seatDownOffset)
         {
             Tile tileSafely = Framing.GetTileSafely(x, y);
             if (IsChairTileBase[tileSafely.TileType])

@@ -11,7 +11,7 @@ namespace Polarities.Items.Placeable
     {
         public override void SetStaticDefaults()
         {
-            SacrificeTotal = (25);
+            Item.ResearchUnlockCount = (25);
         }
 
         public override void SetDefaults()
@@ -42,7 +42,7 @@ namespace Polarities.Items.Placeable
             TileObjectData.newTile.RandomStyleRange = 7;
             TileObjectData.addTile(Type);
 
-            ItemDrop = ItemType<SaltCrystals>();
+            ItemDrop/* tModPorter Note: Removed. Tiles and walls will drop the item which places them automatically. Use RegisterItemDrop to alter the automatic drop if necessary. */ = ItemType<SaltCrystals>();
 
             HitSound = SoundID.Shatter;
 

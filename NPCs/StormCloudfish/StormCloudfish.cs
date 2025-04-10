@@ -44,7 +44,7 @@ namespace Polarities.NPCs.StormCloudfish
                     BuffID.Confused,
                 }
             };
-            NPCID.Sets.DebuffImmunitySets.Add(Type, debuffData);
+            NPCID.Sets.DebuffImmunitySets/* tModPorter Removed: See the porting notes in https://github.com/tModLoader/tModLoader/pull/3453 */.Add(Type, debuffData);
 
             NPCID.Sets.NPCBestiaryDrawModifiers drawModifiers = new NPCID.Sets.NPCBestiaryDrawModifiers(0)
             {
@@ -675,7 +675,7 @@ namespace Polarities.NPCs.StormCloudfish
             return NPC.ai[0] == 1 || NPC.ai[0] == 2;
         }
 
-        public override bool? CanHitNPC(NPC target)
+        public override bool CanHitNPC(NPC target)/* tModPorter Suggestion: Return true instead of null */
         {
             if (NPC.ai[0] == 1 || NPC.ai[0] == 2)
             {
@@ -796,7 +796,7 @@ namespace Polarities.NPCs.StormCloudfish
             }
         }
 
-        public override void Kill(int timeLeft)
+        public override void OnKill(int timeLeft)
         {
             if (Main.netMode != 1)
             {
@@ -876,7 +876,7 @@ namespace Polarities.NPCs.StormCloudfish
             Projectile.velocity *= 0.98f;
         }
 
-        public override void Kill(int timeLeft)
+        public override void OnKill(int timeLeft)
         {
             if (Projectile.ai[1] == 0)
             {

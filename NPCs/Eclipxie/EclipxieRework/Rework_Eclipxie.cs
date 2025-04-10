@@ -87,7 +87,7 @@ namespace Polarities.NPCs.Eclipxie.EclipxieRework
                     BuffID.Confused
                 }
             };
-            NPCID.Sets.DebuffImmunitySets.Add(Type, debuffData);
+            NPCID.Sets.DebuffImmunitySets/* tModPorter Removed: See the porting notes in https://github.com/tModLoader/tModLoader/pull/3453 */.Add(Type, debuffData);
 
             Main.npcFrameCount[NPC.type] = 8;
         }
@@ -1187,7 +1187,7 @@ namespace Polarities.NPCs.Eclipxie.EclipxieRework
             }
         }
 
-        public override bool? CanHitNPC(NPC target)
+        public override bool CanHitNPC(NPC target)/* tModPorter Suggestion: Return true instead of null */
         {
             return splitIntoMinions ? false : null;
         }
@@ -1337,7 +1337,7 @@ namespace Polarities.NPCs.Eclipxie.EclipxieRework
                     BuffID.Confused
                 }
             };
-            NPCID.Sets.DebuffImmunitySets.Add(Type, debuffData);
+            NPCID.Sets.DebuffImmunitySets/* tModPorter Removed: See the porting notes in https://github.com/tModLoader/tModLoader/pull/3453 */.Add(Type, debuffData);
 
             Main.npcFrameCount[NPC.type] = 8;
         }
@@ -1465,7 +1465,7 @@ namespace Polarities.NPCs.Eclipxie.EclipxieRework
                     BuffID.Confused
                 }
             };
-            NPCID.Sets.DebuffImmunitySets.Add(Type, debuffData);
+            NPCID.Sets.DebuffImmunitySets/* tModPorter Removed: See the porting notes in https://github.com/tModLoader/tModLoader/pull/3453 */.Add(Type, debuffData);
 
             Main.npcFrameCount[NPC.type] = 8;
         }

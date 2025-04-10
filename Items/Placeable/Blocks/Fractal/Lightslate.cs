@@ -12,7 +12,7 @@ namespace Polarities.Items.Placeable.Blocks.Fractal
     {
         public override void SetStaticDefaults()
         {
-            SacrificeTotal = 100;
+            Item.ResearchUnlockCount = 100;
             ItemID.Sets.ExtractinatorMode[Type] = Type;
         }
 
@@ -21,7 +21,7 @@ namespace Polarities.Items.Placeable.Blocks.Fractal
             Item.DefaultToPlaceableTile(ModContent.TileType<LightslateTile>());
         }
 
-        public override void ExtractinatorUse(ref int resultType, ref int resultStack)
+        public override void ExtractinatorUse(int extractinatorBlockType, ref int resultType, ref int resultStack)
         {
             resultStack = 1;
 
@@ -191,7 +191,7 @@ namespace Polarities.Items.Placeable.Blocks.Fractal
             AddMapEntry(new Color(117, 171, 235));
 
             DustType = 116;
-            ItemDrop = ItemType<Lightslate>();
+            ItemDrop/* tModPorter Note: Removed. Tiles and walls will drop the item which places them automatically. Use RegisterItemDrop to alter the automatic drop if necessary. */ = ItemType<Lightslate>();
             HitSound = SoundID.Dig;
 
             MineResist = 2f;
@@ -279,7 +279,7 @@ namespace Polarities.Items.Placeable.Blocks.Fractal
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Lightslate");
+            // DisplayName.SetDefault("Lightslate");
             ProjectileID.Sets.ForcePlateDetection[Projectile.type] = true;
         }
 
@@ -379,7 +379,7 @@ namespace Polarities.Items.Placeable.Blocks.Fractal
             return false;
         }
 
-        public override void Kill(int timeLeft)
+        public override void OnKill(int timeLeft)
         {
             if (Projectile.owner == Main.myPlayer && !Projectile.noDropItem)
             {

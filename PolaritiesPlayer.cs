@@ -47,15 +47,15 @@ namespace Polarities
         public override void Load()
         {
             //allow crits from enemies
-            IL.Terraria.Player.Update_NPCCollision += Player_Update_NPCCollision;
+            Terraria.IL_Player.Update_NPCCollision += Player_Update_NPCCollision;
             //modify color of damage text for crits from enemies
-            IL.Terraria.Player.Hurt += Player_Hurt;
+            Terraria.IL_Player.Hurt += Player_Hurt;
             //modify damage numbers for negative life regen effects
-            IL.Terraria.Player.UpdateLifeRegen += Player_UpdateLifeRegen;
+            Terraria.IL_Player.UpdateLifeRegen += Player_UpdateLifeRegen;
             //dev armor
-            On.Terraria.Player.TryGettingDevArmor += Player_TryGettingDevArmor;
+            Terraria.On_Player.TryGettingDevArmor += Player_TryGettingDevArmor;
             //customskies
-            IL.Terraria.Player.UpdateBiomes += Player_UpdateBiomes;
+            Terraria.IL_Player.UpdateBiomes += Player_UpdateBiomes;
         }
 
         public int warhammerDefenseBoost = 0;
@@ -527,8 +527,8 @@ namespace Polarities
             canJumpAgain_Sail_Extra = false;
             if (Player.HasBuff(BuffType<KingSlimeBookBuff>()))
             {
-                if (Player.hasJumpOption_Sail) { canJumpAgain_Sail_Extra = true; }
-                Player.hasJumpOption_Sail = true;
+                if (Player.GetJumpState(ExtraJump.TsunamiInABottle).Enabled) { canJumpAgain_Sail_Extra = true; }
+                Player.GetJumpState(ExtraJump.TsunamiInABottle).Enabled = true/* tModPorter Suggestion: Call Enable() if setting this to true, otherwise call Disable(). */;
             }
 
             if (stargelAmulet)
@@ -623,10 +623,10 @@ namespace Polarities
                 {
                     jumpAgain_Sail_Extra = true;
                 }
-                if (!Player.canJumpAgain_Sail && jumpAgain_Sail_Extra)
+                if (!Player.GetJumpState(ExtraJump.TsunamiInABottle).Available && jumpAgain_Sail_Extra)
                 {
                     jumpAgain_Sail_Extra = false;
-                    Player.canJumpAgain_Sail = true;
+                    Player.GetJumpState(ExtraJump.TsunamiInABottle).Available = true;
                 }
             }
 
@@ -875,17 +875,17 @@ namespace Polarities
             }
         }
 
-        public override bool? CanHitNPC(Item item, NPC target)
+        public override bool? CanHitNPCWithItem(Item item, NPC target)
         {
             if (target.GetGlobalNPC<PolaritiesNPC>().usesProjectileHitCooldowns && itemHitCooldown > 0)
             {
                 return false;
             }
 
-            return base.CanHitNPC(item, target);
+            return base.CanHitNPCWithItem(item, target);
         }
 
-        public override void OnHitNPC(Item item, NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPCWithItem(Item item, NPC target, NPC.HitInfo hit, int damageDone)/* tModPorter If you don't need the Item, consider using OnHitNPC instead */
         {
             OnHitNPCWithAnything(target, damage, knockback, crit, item.DamageType);
 
@@ -900,7 +900,7 @@ namespace Polarities
             }
         }
 
-        public override void OnHitNPCWithProj(Projectile proj, NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPCWithProj(Projectile proj, NPC target, NPC.HitInfo hit, int damageDone)/* tModPorter If you don't need the Projectile, consider using OnHitNPC instead */
         {
             OnHitNPCWithAnything(target, damage, knockback, crit, proj.DamageType);
 
@@ -940,7 +940,7 @@ namespace Polarities
             }
         }
 
-        public override void Hurt(bool pvp, bool quiet, double damage, int hitDirection, bool crit, int cooldownCounter)
+        public override void OnHurt(Player.HurtInfo info)
         {
             //TODO: (MAYBE) Replace with source propagation system once supported/if it doesn't end up being trivially supported, also move terraprisma to be obtained on any flawless run if/when this system is added
             for (int i = 0; i < Main.maxNPCs; i++)
@@ -1111,12 +1111,12 @@ namespace Polarities
             return Player.dashType == 0 && !Player.setSolar && !Player.mount.Active;
         }
 
-        public override void ModifyHitNPC(Item item, NPC target, ref int damage, ref float knockback, ref bool crit)
+        public override void ModifyHitNPCWithItem(Item item, NPC target, ref NPC.HitModifiers modifiers)/* tModPorter If you don't need the Item, consider using ModifyHitNPC instead */
         {
             ModifyHitNPCWithAnything(target, item.DamageType, ref damage, ref knockback, ref crit);
         }
 
-        public override void ModifyHitNPCWithProj(Projectile proj, NPC target, ref int damage, ref float knockback, ref bool crit, ref int hitDirection)
+        public override void ModifyHitNPCWithProj(Projectile proj, NPC target, ref NPC.HitModifiers modifiers)/* tModPorter If you don't need the Projectile, consider using ModifyHitNPC instead */
         {
             ModifyHitNPCWithAnything(target, proj.DamageType, ref damage, ref knockback, ref crit);
         }
@@ -1138,12 +1138,12 @@ namespace Polarities
             }
         }
 
-        public override void ModifyHitByNPC(NPC npc, ref int damage, ref bool crit)
+        public override void ModifyHitByNPC(NPC npc, ref Player.HurtModifiers modifiers)
         {
             ModifyHitByAnything(ref damage, ref crit);
         }
 
-        public override void ModifyHitByProjectile(Projectile projectile, ref int damage, ref bool crit)
+        public override void ModifyHitByProjectile(Projectile proj, ref Player.HurtModifiers modifiers)
         {
             ModifyHitByAnything(ref damage, ref crit);
         }
@@ -1153,7 +1153,7 @@ namespace Polarities
             if (Player.HasBuff(BuffType<Pinpointed>()) && Main.rand.NextBool()) crit = true;
         }
 
-        public override bool PreHurt(bool pvp, bool quiet, ref int damage, ref int hitDirection, ref bool crit, ref bool customDamage, ref bool playSound, ref bool genGore, ref PlayerDeathReason damageSource, ref int cooldownCounter)
+        public override void ModifyHurt(ref Player.HurtModifiers modifiers)/* tModPorter Override ImmuneTo, FreeDodge or ConsumableDodge instead to prevent taking damage */
         {
             if (crit && !pvp)
             {
@@ -1387,7 +1387,7 @@ namespace Polarities
         }
 
         //modded dev items
-        private void Player_TryGettingDevArmor(On.Terraria.Player.orig_TryGettingDevArmor orig, Player self, IEntitySource source)
+        private void Player_TryGettingDevArmor(Terraria.On_Player.orig_TryGettingDevArmor orig, Player self, IEntitySource source)
         {
             orig(self, source);
 

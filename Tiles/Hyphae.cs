@@ -312,7 +312,7 @@ namespace Polarities.Tiles
             AddMapEntry(new Color(189, 237, 232));
 
             DustType = 116;
-            ItemDrop = ModContent.ItemType<FractalMatter>();
+            ItemDrop/* tModPorter Note: Removed. Tiles and walls will drop the item which places them automatically. Use RegisterItemDrop to alter the automatic drop if necessary. */ = ModContent.ItemType<FractalMatter>();
             HitSound = SoundID.Dig;
 
             MineResist = 3f;
@@ -349,7 +349,7 @@ namespace Polarities.Tiles
             AddMapEntry(new Color(150, 247, 207));
 
             DustType = 116;
-            ItemDrop = ModContent.ItemType<FractalStrands>();
+            ItemDrop/* tModPorter Note: Removed. Tiles and walls will drop the item which places them automatically. Use RegisterItemDrop to alter the automatic drop if necessary. */ = ModContent.ItemType<FractalStrands>();
             HitSound = SoundID.Dig;
 
             MineResist = 3f;
@@ -393,7 +393,7 @@ namespace Polarities.Tiles
             AddMapEntry(new Color(227, 122, 248));
 
             DustType = 37;
-            ItemDrop = ModContent.ItemType<FractalDuststone>();
+            ItemDrop/* tModPorter Note: Removed. Tiles and walls will drop the item which places them automatically. Use RegisterItemDrop to alter the automatic drop if necessary. */ = ModContent.ItemType<FractalDuststone>();
             HitSound = SoundID.Dig;
 
             MineResist = 3f;

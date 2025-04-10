@@ -98,7 +98,7 @@ namespace Polarities.NPCs.StarConstruct
                     BuffID.Confused
                 }
             };
-            NPCID.Sets.DebuffImmunitySets.Add(Type, debuffData);
+            NPCID.Sets.DebuffImmunitySets/* tModPorter Removed: See the porting notes in https://github.com/tModLoader/tModLoader/pull/3453 */.Add(Type, debuffData);
 
             var drawModifier = new NPCID.Sets.NPCBestiaryDrawModifiers(0)
             {
@@ -1018,7 +1018,7 @@ namespace Polarities.NPCs.StarConstruct
             get => NPC.ai[0] == 4 && (NPC.localAI[0] == 1 || !Main.expertMode) && NPC.ai[1] >= 240 && NPC.ai[1] < 480;
         }
 
-        public override bool? CanHitNPC(NPC target)
+        public override bool CanHitNPC(NPC target)/* tModPorter Suggestion: Return true instead of null */
         {
             if (canDamage)
             {
@@ -1301,7 +1301,7 @@ namespace Polarities.NPCs.StarConstruct
             NPC.dontTakeDamage = true;
         }
 
-        public override void ScaleExpertStats(int numPlayers, float bossLifeScale)
+        public override void ApplyDifficultyAndPlayerScaling(int numPlayers, float balance, float bossAdjustment)/* tModPorter Note: bossLifeScale -> balance (bossAdjustment is different, see the docs for details) */
         {
             NPC.lifeMax = (int)(1000 * bossLifeScale);
         }
@@ -2052,7 +2052,7 @@ namespace Polarities.NPCs.StarConstruct
             {
                 ImmuneToAllBuffsThatAreNotWhips = true
             };
-            NPCID.Sets.DebuffImmunitySets.Add(Type, debuffData);
+            NPCID.Sets.DebuffImmunitySets/* tModPorter Removed: See the porting notes in https://github.com/tModLoader/tModLoader/pull/3453 */.Add(Type, debuffData);
 
             PolaritiesNPC.npcTypeCap[Type] = 1;
         }
@@ -2417,7 +2417,7 @@ namespace Polarities.NPCs.StarConstruct
             }
         }
 
-        public override void Kill(int timeLeft)
+        public override void OnKill(int timeLeft)
         {
             SoundEngine.PlaySound(SoundID.Item10, Projectile.position);
             Color newColor7 = Color.CornflowerBlue;

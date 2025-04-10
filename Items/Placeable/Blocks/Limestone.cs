@@ -12,7 +12,7 @@ namespace Polarities.Items.Placeable.Blocks
         {
             ItemID.Sets.SortingPriorityMaterials[Item.type] = ItemID.Sets.SortingPriorityMaterials[ItemID.StoneBlock];
 
-            SacrificeTotal = (100);
+            Item.ResearchUnlockCount = (100);
         }
 
         public override void SetDefaults()
@@ -43,7 +43,7 @@ namespace Polarities.Items.Placeable.Blocks
             AddMapEntry(new Color(61, 76, 61));
 
             DustType = DustType<Dusts.LimestoneDust>();
-            ItemDrop = ItemType<Limestone>();
+            ItemDrop/* tModPorter Note: Removed. Tiles and walls will drop the item which places them automatically. Use RegisterItemDrop to alter the automatic drop if necessary. */ = ItemType<Limestone>();
 
             HitSound = SoundID.Tink;
 

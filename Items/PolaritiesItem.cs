@@ -23,11 +23,11 @@ namespace Polarities.Items
             IsFractalWeapon = new HashSet<int>();
 
             //custom biome mimic summons
-            On.Terraria.NPC.BigMimicSummonCheck += NPC_BigMimicSummonCheck;
-            On.Terraria.UI.ItemSlot.Draw_SpriteBatch_ItemArray_int_int_Vector2_Color += ItemSlot_Draw_SpriteBatch_ItemArray_int_int_Vector2_Color;
+            Terraria.On_NPC.BigMimicSummonCheck += NPC_BigMimicSummonCheck;
+            Terraria.UI.On_ItemSlot.Draw_SpriteBatch_ItemArray_int_int_Vector2_Color += ItemSlot_Draw_SpriteBatch_ItemArray_int_int_Vector2_Color;
         }
 
-        private static void ItemSlot_Draw_SpriteBatch_ItemArray_int_int_Vector2_Color(On.Terraria.UI.ItemSlot.orig_Draw_SpriteBatch_ItemArray_int_int_Vector2_Color orig, SpriteBatch spriteBatch, Item[] inv, int context, int slot, Vector2 position, Color lightColor)
+        private static void ItemSlot_Draw_SpriteBatch_ItemArray_int_int_Vector2_Color(Terraria.UI.On_ItemSlot.orig_Draw_SpriteBatch_ItemArray_int_int_Vector2_Color orig, SpriteBatch spriteBatch, Item[] inv, int context, int slot, Vector2 position, Color lightColor)
         {
             bool doDraw = true;
             IInventoryDrawItem inventoryDrawItem = null;
@@ -47,7 +47,7 @@ namespace Polarities.Items
             }
         }
 
-        private static bool NPC_BigMimicSummonCheck(On.Terraria.NPC.orig_BigMimicSummonCheck orig, int x, int y, Player user)
+        private static bool NPC_BigMimicSummonCheck(Terraria.On_NPC.orig_BigMimicSummonCheck orig, int x, int y, Player user)
         {
             //adapted from vanilla
             if (Main.netMode == NetmodeID.MultiplayerClient || !Main.hardMode)

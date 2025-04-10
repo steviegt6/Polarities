@@ -22,7 +22,7 @@ namespace Polarities.NPCs.RiftDenizen
         public override void SetStaticDefaults()
         {
             Main.npcFrameCount[NPC.type] = 1;
-            NPCID.Sets.DebuffImmunitySets[Type] = new NPCDebuffImmunityData()
+            NPCID.Sets.DebuffImmunitySets/* tModPorter Removed: See the porting notes in https://github.com/tModLoader/tModLoader/pull/3453 */[Type] = new NPCDebuffImmunityData()
             {
                 ImmuneToAllBuffsThatAreNotWhips = true,
             };
@@ -74,7 +74,7 @@ namespace Polarities.NPCs.RiftDenizen
             return true;
         }
 
-        public override bool StrikeNPC(ref double damage, int defense, ref float knockback, int hitDirection, ref bool crit)
+        public override void ModifyIncomingHit(ref NPC.HitModifiers modifiers)
         {
             return false;
         }
@@ -992,12 +992,12 @@ namespace Polarities.NPCs.RiftDenizen
             return Math.Abs(NPC.localAI[0]) >= 30;
         }
 
-        public override bool? CanHitNPC(NPC target)
+        public override bool CanHitNPC(NPC target)/* tModPorter Suggestion: Return true instead of null */
         {
             return Math.Abs(NPC.localAI[0]) >= 30;
         }
 
-        public override void OnHitPlayer(Player target, int damage, bool crit)
+        public override void OnHitPlayer(Player target, Player.HurtInfo hurtInfo)
         {
             if (Main.expertMode)
             {
@@ -1044,7 +1044,7 @@ namespace Polarities.NPCs.RiftDenizen
 
 
 
-        public override void OnHitByProjectile(Projectile projectile, int damage, float knockback, bool crit)
+        public override void OnHitByProjectile(Projectile projectile, NPC.HitInfo hit, int damageDone)
         {
             List<int> hitboxIds = new List<int>();
             for (int i = 0; i < Main.npc.Length; i++)
@@ -1079,7 +1079,7 @@ namespace Polarities.NPCs.RiftDenizen
             }
         }
 
-        public override void OnHitByItem(Player player, Item item, int damage, float knockback, bool crit)
+        public override void OnHitByItem(Player player, Item item, NPC.HitInfo hit, int damageDone)
         {
             List<int> hitboxIds = new List<int>();
             for (int i = 0; i < Main.npc.Length; i++)
@@ -1154,7 +1154,7 @@ namespace Polarities.NPCs.RiftDenizen
             return false;
         }
 
-        public override bool? CanHitNPC(NPC target)
+        public override bool CanHitNPC(NPC target)/* tModPorter Suggestion: Return true instead of null */
         {
             NPC owner = Main.npc[(int)NPC.ai[0]];
 
@@ -1168,7 +1168,7 @@ namespace Polarities.NPCs.RiftDenizen
             return Math.Abs(owner.localAI[0]) >= 30;
         }
 
-        public override void OnHitPlayer(Player target, int damage, bool crit)
+        public override void OnHitPlayer(Player target, Player.HurtInfo hurtInfo)
         {
             if (Main.expertMode)
             {
@@ -1177,7 +1177,7 @@ namespace Polarities.NPCs.RiftDenizen
             }
         }
 
-        public override void OnHitByProjectile(Projectile projectile, int damage, float knockback, bool crit)
+        public override void OnHitByProjectile(Projectile projectile, NPC.HitInfo hit, int damageDone)
         {
             List<int> hitboxIds = new List<int>();
             for (int i = 0; i < Main.npc.Length; i++)
@@ -1212,7 +1212,7 @@ namespace Polarities.NPCs.RiftDenizen
             }
         }
 
-        public override void OnHitByItem(Player player, Item item, int damage, float knockback, bool crit)
+        public override void OnHitByItem(Player player, Item item, NPC.HitInfo hit, int damageDone)
         {
             List<int> hitboxIds = new List<int>();
             for (int i = 0; i < Main.npc.Length; i++)
@@ -1621,7 +1621,7 @@ namespace Polarities.NPCs.RiftDenizen
             Projectile.localAI[0]++;
         }
 
-        public override void OnHitPlayer(Player target, int damage, bool crit)
+        public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
             if (Main.expertMode)
             {
@@ -1726,7 +1726,7 @@ namespace Polarities.NPCs.RiftDenizen
             Projectile.localAI[0]++;
         }
 
-        public override void OnHitPlayer(Player target, int damage, bool crit)
+        public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
             if (Main.expertMode)
             {
@@ -1858,7 +1858,7 @@ namespace Polarities.NPCs.RiftDenizen
             }
         }
 
-        public override void OnHitPlayer(Player target, int damage, bool crit)
+        public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
             if (Main.expertMode)
             {
@@ -1969,7 +1969,7 @@ namespace Polarities.NPCs.RiftDenizen
             }
         }
 
-        public override void OnHitPlayer(Player target, int damage, bool crit)
+        public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
             if (Main.expertMode)
             {
@@ -2061,7 +2061,7 @@ namespace Polarities.NPCs.RiftDenizen
             Projectile.rotation = Projectile.velocity.ToRotation();
         }
 
-        public override void OnHitPlayer(Player target, int damage, bool crit)
+        public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
             if (Main.expertMode)
             {
@@ -2163,7 +2163,7 @@ namespace Polarities.NPCs.RiftDenizen
             return false;
         }
 
-        public override void OnHitPlayer(Player target, int damage, bool crit)
+        public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
             if (Main.expertMode)
             {
@@ -2311,7 +2311,7 @@ namespace Polarities.NPCs.RiftDenizen
             return false;
         }
 
-        public override void OnHitPlayer(Player target, int damage, bool crit)
+        public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
             if (Main.expertMode)
             {

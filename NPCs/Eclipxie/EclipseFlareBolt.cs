@@ -11,7 +11,7 @@ namespace Polarities.NPCs.Eclipxie
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Eclipse Flare");
+            // DisplayName.SetDefault("Eclipse Flare");
         }
 
         public override void SetDefaults()
@@ -56,7 +56,7 @@ namespace Polarities.NPCs.Eclipxie
             return false;
         }
 
-        public override void Kill(int timeLeft)
+        public override void OnKill(int timeLeft)
         {
             SoundEngine.PlaySound(SoundID.Item122, Projectile.position);
             Main.projectile[Projectile.NewProjectile(Projectile.GetSource_Death(), new Vector2(Projectile.Center.X, (Main.maxTilesY - 1) * 16), Vector2.Zero, ProjectileType<EclipseFlare>(), 40, 3, Projectile.owner)].netUpdate = true;

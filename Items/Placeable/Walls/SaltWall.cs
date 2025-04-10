@@ -10,12 +10,12 @@ namespace Polarities.Items.Placeable.Walls
     {
         public override void SetStaticDefaults()
         {
-            SacrificeTotal = (400);
+            Item.ResearchUnlockCount = (400);
         }
 
         public override void SetDefaults()
         {
-            Item.DefaultToPlacableWall((ushort)WallType<SaltWallPlaced>());
+            Item.DefaultToPlaceableWall((ushort)WallType<SaltWallPlaced>());
         }
 
         public override void AddRecipes()
@@ -32,7 +32,7 @@ namespace Polarities.Items.Placeable.Walls
         public override void SetStaticDefaults()
         {
             Main.wallHouse[Type] = true;
-            ItemDrop = ItemType<SaltWall>();
+            ItemDrop/* tModPorter Note: Removed. Tiles and walls will drop the item which places them automatically. Use RegisterItemDrop to alter the automatic drop if necessary. */ = ItemType<SaltWall>();
             AddMapEntry(new Color(127, 115, 115));
 
             DustType = DustType<Dusts.SaltDust>();

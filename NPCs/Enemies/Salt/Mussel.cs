@@ -143,7 +143,7 @@ namespace Polarities.NPCs.Enemies.Salt
             }
         }
 
-        public override void ModifyHitPlayer(Player target, ref int damage, ref bool crit)
+        public override void ModifyHitPlayer(Player target, ref Player.HurtModifiers modifiers)
         {
             //snap closed on player
             if (NPC.ai[1] == 1)
@@ -221,7 +221,7 @@ namespace Polarities.NPCs.Enemies.Salt
             return false;
         }
 
-        public override void Kill(int timeLeft)
+        public override void OnKill(int timeLeft)
         {
             SoundEngine.PlaySound(SoundID.Shatter, Projectile.Center);
             for (int i = 0; i < 3; i++)

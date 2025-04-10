@@ -19,7 +19,7 @@ namespace Polarities.Items.Armor.MechaMayhemArmor
     {
         public override void SetStaticDefaults()
         {
-            SacrificeTotal = (1);
+            Item.ResearchUnlockCount = (1);
 
             int equipSlotBody = EquipLoader.GetEquipSlot(Mod, Name, EquipType.Body);
             ArmorIDs.Body.Sets.HidesArms[equipSlotBody] = true;
@@ -64,7 +64,7 @@ namespace Polarities.Items.Armor.MechaMayhemArmor
 
         public override void SetStaticDefaults()
         {
-            SacrificeTotal = (1);
+            Item.ResearchUnlockCount = (1);
 
             //registers a head glowmask
             ArmorMasks.legIndexToArmorDraw.TryAdd(EquipLoader.GetEquipSlot(Mod, Name, EquipType.Legs), this);
@@ -152,7 +152,7 @@ namespace Polarities.Items.Armor.MechaMayhemArmor
 
         public override void SetStaticDefaults()
         {
-            SacrificeTotal = (1);
+            Item.ResearchUnlockCount = (1);
 
             int equipSlotHead = EquipLoader.GetEquipSlot(Mod, Name, EquipType.Head);
             ArmorIDs.Head.Sets.DrawHead[equipSlotHead] = false;
@@ -503,7 +503,7 @@ namespace Polarities.Items.Armor.MechaMayhemArmor
             Main.EntitySpriteDraw(MaskTexture.Value, Projectile.Center - Main.screenPosition, new Rectangle(0, 0, 16, 16), Color.White, Projectile.rotation, new Vector2(8, 8), Projectile.scale, Projectile.spriteDirection == 1 ? SpriteEffects.None : SpriteEffects.FlipVertically, 0);
         }
 
-        public override void Kill(int timeLeft)
+        public override void OnKill(int timeLeft)
         {
             for (int i = 0; i < 6; i++)
             {
@@ -548,7 +548,7 @@ namespace Polarities.Items.Armor.MechaMayhemArmor
             return false;
         }
 
-        public override void Kill(int timeLeft)
+        public override void OnKill(int timeLeft)
         {
             Dust.NewDustPerfect(Projectile.Center, 130, Vector2.Zero, Scale: 0.75f).noGravity = true;
         }

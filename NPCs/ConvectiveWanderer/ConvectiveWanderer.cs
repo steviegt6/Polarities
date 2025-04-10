@@ -148,7 +148,7 @@ namespace Polarities.NPCs.ConvectiveWanderer
                     BuffType<Incinerating>()
                 }
             };
-            NPCID.Sets.DebuffImmunitySets.Add(Type, debuffData);
+            NPCID.Sets.DebuffImmunitySets/* tModPorter Removed: See the porting notes in https://github.com/tModLoader/tModLoader/pull/3453 */.Add(Type, debuffData);
 
             NPCID.Sets.NPCBestiaryDrawModifiers drawModifiers = new NPCID.Sets.NPCBestiaryDrawModifiers(0)
             {
@@ -1890,7 +1890,7 @@ namespace Polarities.NPCs.ConvectiveWanderer
         }
 
 
-        public override void OnHitPlayer(Player target, int damage, bool crit)
+        public override void OnHitPlayer(Player target, Player.HurtInfo hurtInfo)
         {
             target.AddBuff(BuffType<Incinerating>(), 60, true);
         }
@@ -2686,7 +2686,7 @@ namespace Polarities.NPCs.ConvectiveWanderer
             return Projectile.timeLeft < 30 ? false : null;
         }
 
-        public override void OnHitPlayer(Player target, int damage, bool crit)
+        public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
             target.AddBuff(BuffType<Incinerating>(), 60, true);
         }
@@ -2915,7 +2915,7 @@ namespace Polarities.NPCs.ConvectiveWanderer
             ParticleLayer.AfterLiquidsAdditive.Add(particle);
         }
 
-        public override void Kill(int timeLeft)
+        public override void OnKill(int timeLeft)
         {
             int numProjectilesPerRing = (Projectile.ai[1] == 0 ? 1 : 2) * 16;
             int numProjectilesPerAngle = 5;
@@ -2964,7 +2964,7 @@ namespace Polarities.NPCs.ConvectiveWanderer
             return Projectile.timeLeft > 660 ? false : null;
         }
 
-        public override void OnHitPlayer(Player target, int damage, bool crit)
+        public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
             target.AddBuff(BuffType<Incinerating>(), 60, true);
         }
@@ -3175,7 +3175,7 @@ namespace Polarities.NPCs.ConvectiveWanderer
             DrawLayer.AddProjectile<DrawLayerAdditiveAfterLiquids>(index);
         }
 
-        public override void OnHitPlayer(Player target, int damage, bool crit)
+        public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
             target.AddBuff(BuffType<Incinerating>(), 60, true);
         }
@@ -3271,7 +3271,7 @@ namespace Polarities.NPCs.ConvectiveWanderer
             DrawLayer.AddProjectile<DrawLayerAdditiveAfterLiquids>(index);
         }
 
-        public override void OnHitPlayer(Player target, int damage, bool crit)
+        public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
             target.AddBuff(BuffType<Incinerating>(), 60, true);
         }
@@ -3389,7 +3389,7 @@ namespace Polarities.NPCs.ConvectiveWanderer
             ParticleLayer.AfterLiquidsAdditive.Add(particle);
         }
 
-        public override void Kill(int timeLeft)
+        public override void OnKill(int timeLeft)
         {
             for (int i = 0; i < (Projectile.ai[1] == 0f ? 1 : 2) * 100; i++)
             {
@@ -3409,7 +3409,7 @@ namespace Polarities.NPCs.ConvectiveWanderer
             return Projectile.timeLeft > 690 ? false : null;
         }
 
-        public override void OnHitPlayer(Player target, int damage, bool crit)
+        public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
             target.AddBuff(BuffType<Incinerating>(), 60, true);
         }
@@ -3490,7 +3490,7 @@ namespace Polarities.NPCs.ConvectiveWanderer
             return (Projectile.timeLeft < 30 || Projectile.timeLeft > 3597) ? false : null;
         }
 
-        public override void OnHitPlayer(Player target, int damage, bool crit)
+        public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
             target.AddBuff(BuffType<Incinerating>(), 60, true);
         }
